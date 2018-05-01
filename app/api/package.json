@@ -5,7 +5,7 @@
   "author": "Joey Schluchter <jschluchter@gmail.com>",
   "scripts": {
     "dev": "NODE_ENV='development' MONGODB_URI='mongodb://localhost:27017/webratings' node ./bin/www",
-    "localmachine": "NODE_ENV='development' MONGODB_URI='mongodb://localhost:27019/webratings' node ./bin/www",
+    "localmachine": "NODE_ENV='development' MONGODB_URI='mongodb://localhost:27017/webratings' node ./bin/www",
     "container": "NODE_ENV='development' node ./bin/www"
   },
   "dependencies": {
