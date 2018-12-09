@@ -79,7 +79,7 @@ pipeline {
         steps{
                dir('app')
                {
-                sh "helm install ./webapichart/ --name webapihelmd --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
+                sh "~/usr/local/bin/helm install ./webapichart/ --name webapihelmd --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
                }
         }
     }    
@@ -87,7 +87,7 @@ pipeline {
         steps{
             dir('app')
             {
-                sh "helm install ./dbchart/ --name dbhelmd --set dbserver.image.repo=${env.DB_IMAGE} --set dbserver.image.tag=latest"
+                sh "~/usr/local/bin/helm install ./dbchart/ --name dbhelmd --set dbserver.image.repo=${env.DB_IMAGE} --set dbserver.image.tag=latest"
             }
         }
     }  
