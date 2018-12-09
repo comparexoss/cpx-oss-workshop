@@ -79,7 +79,7 @@ pipeline {
         steps{
                dir('app')
                {
-                sh """helm install .\webapichart\ --name webapihelmd --set webserver.image.repo="${env.WEB_IMAGE}" --set webserver.image.tag=latest --set apiserver.image.repo="${env.API_IMAGE}" --set apiserver.image.tag=latest"""
+                sh "helm install .\webapichart\ --name webapihelmd --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
                }
         }
     }    
