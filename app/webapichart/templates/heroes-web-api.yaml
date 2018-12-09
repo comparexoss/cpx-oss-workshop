@@ -85,7 +85,7 @@ spec:
       imagePullSecrets:
         - name: acr-secret
       containers:
-      - image: {{ .Values.dbserver.image.repo }}:{{ .Values.webserver.image.tag }}
+      - image: {{ .Values.webserver.image.repo }}:{{ .Values.webserver.image.tag }}
         name:  heroes-web-cntnr
         resources:
           requests:
