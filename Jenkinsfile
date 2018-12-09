@@ -80,7 +80,7 @@ pipeline {
                dir('app')
                {
              
-                sh "sudo /usr/local/bin/helm install ./webapichart/ --name webapihelmd --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
+                sh "sudo /usr/local/bin/helm upgrade ./webapichart/ --name webapihelmd --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
                }
         }
     }    
