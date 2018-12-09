@@ -20,7 +20,7 @@
         <at-button @click="link('Leaderboard')" icon="icon-bar-chart-2" class="mid-btn" type="success" hollow>View Leaderboard</at-button>
       </div>
       <div class="col-lg-6">
-        <a href="https://github.com/muammerbenzes/mstr-devops-workshop" target="_blank"><at-button icon="icon-github" class="mid-btn" type="info" hollow>Steal This Code</at-button></a>
+        <a href="https://github.com/hakkiogretmen/mstr-devops-workshop" target="_blank"><at-button icon="icon-github" class="mid-btn" type="info" hollow>Steal This Code</at-button></a>
       </div>
       <div class="col-lg-3">
       </div>
