@@ -79,8 +79,8 @@ pipeline {
         steps{
                dir('app')
                {
-             
-                sh "sudo /usr/local/bin/helm upgrade webapihelmd ./webapichart/ --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
+                sh 'sudo /usr/local/bin/helm update'
+                sh "sudo /usr/local/bin/helm upgrade webapihelmd ./webapichart/ --wait --recreate-pods --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=latest"
                }
         }
     }    
