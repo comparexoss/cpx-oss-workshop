@@ -4,6 +4,9 @@ pipeline {
         ACR_REPO    = 'mstrdevopsworkshop'
         ACR_CRED = credentials('acr-credentials')
         GIT_REPO = "https://github.com/comparexoss/cpx-oss-workshop.git"
+        WEB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web"
+        API_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api"
+        DB_IMAGE="${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db"
     }
   agent any
   stages {
@@ -17,7 +20,7 @@ pipeline {
                 dir('app/api')
                 {
                     script{
-                    docker.build("${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api:${env.BUILD_NUMBER}")
+                    docker.build("${env.API_IMAGE}:${env.BUILD_NUMBER}")
                     }         
                 }
             }
@@ -27,7 +30,7 @@ pipeline {
                 dir('app/web')
                 {
                     script{
-                    docker.build("${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web:${env.BUILD_NUMBER}")
+                    docker.build("${env.WEB_IMAGE}:${env.BUILD_NUMBER}")
                     }         
                 }
             }
@@ -37,7 +40,7 @@ pipeline {
                 dir('app/db')
                 {
                     script{
-                    docker.build("${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db:${env.BUILD_NUMBER}")
+                    docker.build("${env.DB_IMAGE}:${env.BUILD_NUMBER}")
                     }         
                 }
             }
@@ -46,9 +49,9 @@ pipeline {
         steps{
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login ${env.ACR_LOGINSERVER} -u $USERNAME -p $PASSWORD"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api:${env.BUILD_NUMBER}"
-            sh "docker tag ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api:${env.BUILD_NUMBER} ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api:latest"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api:latest"
+            sh "docker push ${env.API_IMAGE}:${env.BUILD_NUMBER}"
+            sh "docker tag ${env.API_IMAGE}:${env.BUILD_NUMBER} ${env.API_IMAGE}:latest"
+            sh "docker push ${env.API_IMAGE}:latest"
             }
         }
     }
@@ -56,9 +59,9 @@ pipeline {
         steps{
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login ${env.ACR_LOGINSERVER} -u $USERNAME -p $PASSWORD"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web:${env.BUILD_NUMBER}"
-            sh "docker tag ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web:${env.BUILD_NUMBER} ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web:latest"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web:latest"
+            sh "docker push ${env.WEB_IMAGE}:${env.BUILD_NUMBER}"
+            sh "docker tag ${env.WEB_IMAGE}:${env.BUILD_NUMBER} ${env.WEB_IMAGE}:latest"
+            sh "docker push ${env.WEB_IMAGE}:latest"
             }
         }
     }
@@ -66,21 +69,21 @@ pipeline {
         steps{
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login ${env.ACR_LOGINSERVER} -u $USERNAME -p $PASSWORD"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db:${env.BUILD_NUMBER}"
-            sh "docker tag ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db:${env.BUILD_NUMBER} ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db:latest"
-            sh "docker push ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db:latest"
+            sh "docker push ${env.DB_IMAGE}:${env.BUILD_NUMBER}"
+            sh "docker tag ${env.DB_IMAGE}:${env.BUILD_NUMBER} ${env.DB_IMAGE}:latest"
+            sh "docker push ${env.DB_IMAGE}:latest"
             }
         }
     }
     stage('Helm WebApi Deploy') {
         steps{
-            sh "helm install .\app\webapichart\ --name webapihelmd --set apiserver.image.repo=${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web --set webserver.image.tag=latest --set apiserver.image.repo ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api --set apiserver.image.tag=latest"
+            sh "helm install .\app\webapichart\ --name webapihelmd --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=latest --set apiserver.image.repo ${env.API_IMAGE} --set apiserver.image.tag=latest"
             
         }
     }    
      stage('Helm DB Deploy') {
         steps{
-            sh "helm install .\app\dbchart\ --name dbhelmd --set dbserver.image.repo=${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db --set dbserver.image.tag=latest"
+            sh "helm install .\app\dbchart\ --name dbhelmd --set dbserver.image.repo=${env.DB_IMAGE} --set dbserver.image.tag=latest"
             
         }
     }  
