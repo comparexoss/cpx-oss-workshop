@@ -22,8 +22,9 @@ The labs are based upon a node.js application that allows for voting on the Just
   6. [Kubernetes UI Overview]
   7. [Operational Monitoring and Log Management]
   8. [Application and Infrastructure Scaling]
-  9. [Update and Deploy New Version of Application]
-  10. [Upgrade an Azure Kubernetes Service (AKS) cluster]
+  9. [Upgrade an Azure Kubernetes Service (AKS) cluster]
+  10. [Update and Deploy New Version of Application]
+ 
   
 ## Contributing
 
