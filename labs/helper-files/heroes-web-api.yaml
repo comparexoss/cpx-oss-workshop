@@ -34,7 +34,7 @@ spec:
       imagePullSecrets:
         - name: acr-secret
       containers:
-      - image: <login server>/azureworkshop/rating-api:v1
+      - image: <login server>/mstrdevopsworkshop/rating-api:v1
         name:  heroes-api-cntnr
         resources:
           requests:
@@ -85,7 +85,7 @@ spec:
       imagePullSecrets:
         - name: acr-secret
       containers:
-      - image: <login server>/azureworkshop/rating-web:v1
+      - image: <login server>/mstrdevopsworkshop/rating-web:v1
         name:  heroes-web-cntnr
         resources:
           requests:
