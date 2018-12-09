@@ -72,12 +72,17 @@ pipeline {
             }
         }
     }
-    stage('Helm Deploy') {
+    stage('Helm WebApi Deploy') {
         steps{
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh "docker login ${env.ACR_LOGINSERVER} -u $USERNAME -p $PASSWORD"
-            }
+            sh "helm install .\app\webapichart\ --name webapihelmd --set apiserver.image.repo=${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-web --set webserver.image.tag=latest --set apiserver.image.repo ${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-api --set apiserver.image.tag=latest"
+            
         }
     }    
+     stage('Helm DB Deploy') {
+        steps{
+            sh "helm install .\app\dbchart\ --name dbhelmd --set dbserver.image.repo=${env.ACR_LOGINSERVER}/${env.ACR_REPO}/rating-db --set dbserver.image.tag=latest"
+            
+        }
+    }  
   }
 }
