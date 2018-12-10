@@ -84,7 +84,6 @@ pipeline {
         steps{
                dir('app')
                {
-                   sh "sudo /usr/local/bin/helm verify ./webapichart/ --kubeconfig /home/azureuser/.kube/config"
                    sh "sudo /usr/local/bin/helm upgrade --dry-run --debug --install webapihelmd ./webapichart/ --wait --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=${env.BUILD_NUMBER} --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=${env.BUILD_NUMBER}"
                    sh "sudo /usr/local/bin/helm upgrade --install webapihelmd ./webapichart/ --wait --kubeconfig /home/azureuser/.kube/config --set webserver.image.repo=${env.WEB_IMAGE} --set webserver.image.tag=${env.BUILD_NUMBER} --set apiserver.image.repo=${env.API_IMAGE} --set apiserver.image.tag=${env.BUILD_NUMBER}"
                }
@@ -94,7 +93,6 @@ pipeline {
         steps{
             dir('app')
             {
-                sh "sudo /usr/local/bin/helm verify ./dbchart/ --kubeconfig /home/azureuser/.kube/config"
                 sh "sudo /usr/local/bin/helm upgrade --dry-run --debug --install dbhelmdb ./dbchart/ --kubeconfig /home/azureuser/.kube/config --set dbserver.image.repo=${env.DB_IMAGE} --set dbserver.image.tag=${env.BUILD_NUMBER}"
                 sh "sudo /usr/local/bin/helm upgrade --install dbhelmdb ./dbchart/ --kubeconfig /home/azureuser/.kube/config --set dbserver.image.repo=${env.DB_IMAGE} --set dbserver.image.tag=${env.BUILD_NUMBER}"
             }
