@@ -42,6 +42,10 @@ spec:
         ports:
         - containerPort:  27017
           name:  heroes-db
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", ./import.sh]
         volumeMounts:
         - mountPath: /data
           name: data
