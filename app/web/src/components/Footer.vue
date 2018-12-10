@@ -9,8 +9,6 @@
       <div class="col-lg-24">
         <img src="/static/img/msft_logo.png">
       </div>
-    </div>
-        <div class="row at-row flex-center flex-middle">
       <div class="col-lg-24">
         <img src="/static/img/cpx_logo.png">
       </div>
