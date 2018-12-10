@@ -13,7 +13,7 @@ pipeline {
       stage('Checkout') {
    steps {
     //git url: "${env.GIT_REPO}", branch: 'master'
-       sh 'git clone ${env.GIT_REPO}'
+       sh "git clone ${env.GIT_REPO}"
    }
   }
     stage('Building api image') {
