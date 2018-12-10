@@ -7,6 +7,4 @@ COPY ./import.sh /import.sh
 
 EXPOSE 27017
 
-RUN chmod +x /import.sh
-
 
