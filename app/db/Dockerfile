@@ -5,6 +5,8 @@ COPY ./ratings.json /ratings.json
 COPY ./sites.json /sites.json
 COPY ./import.sh /import.sh
 
-RUN chmod 755 /import.sh; exit 0
-
 EXPOSE 27017
+
+RUN chmod +x /import.sh
+
+
