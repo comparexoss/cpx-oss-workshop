@@ -29,7 +29,7 @@ pipeline {
             steps{
                 dir('app/web')
                 {
-                   sh "sudo docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg IMAGE_TAG_REF=v1 -t ${env.WEB_IMAGE}:${env.BUILD_NUMBER} ."
+                   sh "sudo docker build --build-arg BUILD_DATE=2018-12-10T08:06:43Z --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg IMAGE_TAG_REF=v1 -t ${env.WEB_IMAGE}:${env.BUILD_NUMBER} ."
                 }
             }
        }
