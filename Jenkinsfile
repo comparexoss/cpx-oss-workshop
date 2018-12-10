@@ -29,9 +29,9 @@ pipeline {
             steps{
                 dir('app/web')
                 {
-                    mydate = "2018-12-10T08:06:43Z"
+                    
                     script{
-                        docker.build("${env.WEB_IMAGE}:${env.BUILD_NUMBER}", "--build-arg BUILD_DATE=`${env.mydate}` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg IMAGE_TAG_REF=v1 .")
+                        docker.build("${env.WEB_IMAGE}:${env.BUILD_NUMBER}", "--build-arg BUILD_DATE=2018-12-10T08:06:43Z --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg IMAGE_TAG_REF=v1 .")
                     }         
                 }
             }
