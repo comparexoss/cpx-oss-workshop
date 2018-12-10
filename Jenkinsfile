@@ -30,7 +30,7 @@ pipeline {
                 dir('app/web')
                 {
                     script{
-                    docker.build("${env.WEB_IMAGE}:${env.BUILD_NUMBER}", "--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg IMAGE_TAG_REF=v1")
+                    docker.build("${env.WEB_IMAGE}:${env.BUILD_NUMBER}", "--build-arg BUILD_DATE='date -u +"%Y-%m-%dT%H:%M:%SZ"' --build-arg VCS_REF='git rev-parse --short HEAD' --build-arg IMAGE_TAG_REF=v1")
                     }         
                 }
             }
