@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        ACR_LOGINSERVER = 'mstrdevopsacr2.azurecr.io'
+        ACR_LOGINSERVER = 'mstrdevopsacrhkk.azurecr.io'
         ACR_REPO    = 'mstrdevopsworkshop'
         ACR_CRED = credentials('acr-credentials')
         GIT_REPO = "https://github.com/comparexoss/cpx-oss-workshop.git"
