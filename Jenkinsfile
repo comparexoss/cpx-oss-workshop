@@ -38,6 +38,26 @@ pipeline {
                 }
             }
        }
+      stage('Test api image') {
+         agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-api:${env.BUILD_NUMBER}" } 
+               steps {
+                        echo 'test'
+                     }
+        }
+      
+       stage('Test web image') {
+         agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-web:${env.BUILD_NUMBER}" } 
+               steps {
+                        echo 'test'
+                     }
+      }
+      
+        stage('Test mongo image') {
+         agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-db:${env.BUILD_NUMBER}" } 
+               steps {
+                        echo 'test'
+                     }
+      }
     stage('Push images to ACR') {
         steps{
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
