@@ -55,7 +55,7 @@ pipeline {
         stage('Test mongo image') {
          agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-db:${env.BUILD_NUMBER}" } 
                steps {
-                        echo '$HOSTNAME'
+                        echo 'test'
                      }
       }
     stage('Push images to ACR') {
