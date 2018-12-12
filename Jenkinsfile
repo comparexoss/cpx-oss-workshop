@@ -41,21 +41,21 @@ pipeline {
       stage('Test api image') {
          agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-api:${env.BUILD_NUMBER}" } 
                steps {
-                        echo 'test'
+                        echo '$HOSTNAME'
                      }
         }
       
        stage('Test web image') {
          agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-web:${env.BUILD_NUMBER}" } 
                steps {
-                        echo 'test'
+                        echo '$HOSTNAME'
                      }
       }
       
         stage('Test mongo image') {
          agent { docker "mstrdevopsacrhkk.azurecr.io/mstrdevopsworkshop/rating-db:${env.BUILD_NUMBER}" } 
                steps {
-                        echo 'test'
+                        echo '$HOSTNAME'
                      }
       }
     stage('Push images to ACR') {
